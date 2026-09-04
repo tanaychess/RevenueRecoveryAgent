@@ -1,14 +1,12 @@
-# Razorpay AI Revenue Recovery Agent 2.0 (Buildathon 2026 Edition)
+# AI Revenue Recovery Agent
 
 An autonomous, compliant AI agent that closes the loop on failed and degraded payments across Indian financial rails: **detect → diagnose root cause → decide the right intervention → smart schedule → act on Razorpay APIs → log an auditable trail.**
 
-Built for Razorpay's **[AI Buildathon 2026](https://razorpay.com/buildathon/)** — **AI Revenue Recovery** track.
-
 ---
 
-## 🚀 Key Highlights for Buildathon 2026
+## 🚀 Key Highlights
 
-1. **Google Gemini 2.5 Flash Reasoning Core**:
+1. **Google Gemini Reasoning Core**:
    - Classifies free-text ambiguous gateway failure messages and multi-rail degradation codes into 15 root causes with chain-of-thought evidence extraction.
    - Powers dynamic, empathetic 2-way WhatsApp recovery conversations in 8 Indian languages (Hinglish, Hindi, Tamil, Telugu, Kannada, Bengali, Marathi, English) with customer frustration/sentiment awareness.
    - Handles real-time Promise-to-Pay snoozes, churn-prevention discount negotiations, and payment method updates.
@@ -46,7 +44,7 @@ Built for Razorpay's **[AI Buildathon 2026](https://razorpay.com/buildathon/)** 
                     │               RecoveryOrchestrator 2.0                  │
                     │                                                         │
   data/             │   1. DETECT          2. DIAGNOSE        3. DECIDE       │
-  synthetic_batch   ──▶  load batch  ──▶  classify_root_   ──▶ decide_action │
+  synthetic_batch   ──▶  load batch  ──▶  classify_root_   ──▶  decide_action │
   .json (60 recs)   │                     cause()               (YAML rules)  │
   or Live Webhooks  │                     │                      │            │
   (HMAC SHA-256)    │                     ▼                      ▼            │
@@ -54,7 +52,7 @@ Built for Razorpay's **[AI Buildathon 2026](https://razorpay.com/buildathon/)** 
                     │            (always runs)             lookup table:      │
                     │                     │                 max_attempts,     │
                     │                     ▼                 cooldowns,        │
-                    │           [Google Gemini 2.5 Flash]   stop_conditions   │
+                    │            [Google Gemini Flash]      stop_conditions   │
                     │            gemini_classification()   (RBI, NPCI, TRAI)  │
                     │                                                         │
                     │   4. SMART SCHEDULE  5. ACT             6. AUDIT        │
