@@ -115,10 +115,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Razorpay AI Revenue Recovery Agent 2.0 | Next-Gen Financial AI</title>
+        <title>AI Revenue Recovery Agent 2.0 | Next-Gen Financial AI</title>
         <meta
           name="description"
-          content="Autonomous AI Revenue Recovery Engine for failed payments across UPI AutoPay, Cards, and NetBanking with Google Gemini 2.5 Flash and RBI/NPCI compliance guardrails."
+          content="Autonomous AI Revenue Recovery Engine for failed payments across UPI AutoPay, Cards, and NetBanking with Artificial Intelligence and RBI/NPCI compliance guardrails."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -164,8 +164,8 @@ export default function Home() {
                   <div className="w-6 h-6 border-3 border-rzp-blue/30 border-t-rzp-blue rounded-full animate-spin"></div>
                 </div>
               </div>
-              <h3 className="text-base font-bold text-white mb-1">Connecting to Razorpay Recovery Agent Core</h3>
-              <p className="text-xs text-slate-400 font-mono">Initializing Gemini 2.5 Flash &amp; Regulatory Policies…</p>
+              <h3 className="text-base font-bold text-white mb-1">Connecting to Recovery Agent Core</h3>
+              <p className="text-xs text-slate-400 font-mono">Initializing Artificial Intelligence &amp; Regulatory Policies…</p>
             </div>
           ) : (
             <>
@@ -212,7 +212,7 @@ export default function Home() {
                         Autonomous AI Revenue Recovery Engine
                       </h2>
                       <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto mb-8 leading-relaxed">
-                        Eliminate lost revenue across UPI AutoPay, COFT Cards, and NetBanking. Gemini 2.5 Flash diagnoses failures in &lt;140ms while deterministic RBI &amp; NPCI guardrails enforce strict regulatory compliance.
+                        Eliminate lost revenue across UPI AutoPay, COFT Cards, and NetBanking. AI diagnoses failures in &lt;140ms while deterministic RBI &amp; NPCI guardrails enforce strict regulatory compliance.
                       </p>
 
                       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -274,7 +274,7 @@ export default function Home() {
                         <span>💬 Omnichannel 2-Way Conversational Recovery Engine</span>
                       </h2>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        Powered by Gemini 2.5 Flash: Multi-turn negotiation, VIP churn discounts, Promise-to-Pay snoozing, and 8-language fluency.
+                        Powered by Artificial Intelligence: Multi-turn negotiation, VIP churn discounts, Promise-to-Pay snoozing, and 8-language fluency.
                       </p>
                     </div>
                     <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono font-bold shrink-0">
@@ -336,7 +336,7 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
               <span>
-                Built for <strong className="text-slate-300">Razorpay Buildathon 2026</strong> · AI Revenue Recovery Track
+                Built for <strong className="text-slate-300">a stronger payments environment</strong> · AI Revenue Recovery Track
               </span>
             </div>
             <div className="flex items-center gap-3 text-[11px] font-mono text-slate-400">
@@ -348,7 +348,7 @@ export default function Home() {
                 Playbook Rules
               </span>
               <span>•</span>
-              <span>Gemini 2.5 Flash</span>
+              <span>Artificial Intelligence</span>
               <span>•</span>
               <span>RBI / NPCI Guardrails</span>
             </div>
