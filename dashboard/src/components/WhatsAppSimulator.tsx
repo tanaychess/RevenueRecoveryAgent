@@ -136,7 +136,7 @@ export default function WhatsAppSimulator({ initialEntry }: Props) {
                 </div>
                 <div className="text-[11px] text-[#00A884] font-semibold flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#00A884] animate-pulse"></span>
-                  Gemini 2.5 Flash Verified Core
+                  Artificial Intelligence Verified Core
                 </div>
               </div>
             </div>
@@ -197,7 +197,7 @@ export default function WhatsAppSimulator({ initialEntry }: Props) {
                 <span className="w-2 h-2 rounded-full bg-[#00A884] animate-bounce"></span>
                 <span className="w-2 h-2 rounded-full bg-[#00A884] animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-2 h-2 rounded-full bg-[#00A884] animate-bounce [animation-delay:0.4s]"></span>
-                <span className="text-[11px] text-slate-400 font-medium">Gemini evaluating context &amp; intent…</span>
+                <span className="text-[11px] text-slate-400 font-medium">AI evaluating context &amp; intent…</span>
               </div>
             )}
           </div>
@@ -306,13 +306,13 @@ export default function WhatsAppSimulator({ initialEntry }: Props) {
           </div>
         </div>
 
-        {/* Gemini Real-Time Decisioning Inspector */}
+        {/* Real-Time Decisioning Inspector */}
         <div className="glass-card rounded-2xl p-5 border border-rzp-blue/40 bg-blue-950/20 flex-1 flex flex-col justify-between shadow-xl">
           <div>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-sm font-bold text-white flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-rzp-blue animate-pulse"></span>
-                <span>Gemini 2.5 Decision Inspector</span>
+                <span>AI Decision Inspector</span>
               </h3>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-rzp-blue/20 text-rzp-neon font-mono font-bold border border-rzp-blue/30">
                 ACTIVE TRACE
@@ -376,7 +376,7 @@ export default function WhatsAppSimulator({ initialEntry }: Props) {
           </div>
 
           <div className="mt-4 pt-3 border-t border-border/60 text-[11px] text-slate-400 flex items-center justify-between font-mono">
-            <span>Model: Gemini 2.5 Flash</span>
+            <span>Model: Gemini</span>
             <span className="text-emerald-400">Zero PII Storage</span>
           </div>
         </div>

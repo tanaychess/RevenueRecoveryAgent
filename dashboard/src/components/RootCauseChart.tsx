@@ -99,7 +99,7 @@ export default function RootCauseChart({ metrics }: Props) {
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              Gemini 2.5 Flash classifies cryptic bank decline codes into 15 actionable recovery buckets.
+              AI classifies cryptic bank decline codes into 15 actionable recovery buckets.
             </p>
           </div>
 

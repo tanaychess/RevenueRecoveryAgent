@@ -47,7 +47,7 @@ export default function Header({
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-base sm:text-lg font-extrabold tracking-tight text-white flex items-center gap-2">
-                Razorpay <span className="rzp-gradient-text">Recovery Agent 2.0</span>
+                AI <span className="rzp-gradient-text">Recovery Agent 2.0</span>
               </h1>
               <span className="hidden sm:inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-rzp-blue/15 text-rzp-blue border border-rzp-blue/30 shadow-sm">
                 FINANCIAL AI
@@ -56,7 +56,7 @@ export default function Header({
             <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-400">
               <span className="flex items-center gap-1.5 font-medium text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Gemini 2.5 Flash</span>
+                <span>Artificial Intelligence</span>
               </span>
               <span className="text-slate-600">•</span>
               <span className="text-slate-300 font-mono text-[11px]">&lt;140ms Latency</span>

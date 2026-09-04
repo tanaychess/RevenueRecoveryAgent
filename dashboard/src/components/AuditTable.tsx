@@ -137,7 +137,7 @@ export default function AuditTable({ entries, onPaymentResolved, onSelectForChat
             </span>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            Real-time forensic log of all Gemini 2.5 Flash diagnoses, RBI guardrail checks, and recovery executions.
+            Real-time forensic log of all Artificial Intelligence diagnoses, RBI guardrail checks, and recovery executions.
           </p>
         </div>
 

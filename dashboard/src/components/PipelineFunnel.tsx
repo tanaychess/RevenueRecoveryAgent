@@ -38,10 +38,10 @@ export default function PipelineFunnel({ metrics, onSelectStageFilter }: Props) 
     {
       id: "diagnose",
       num: "02",
-      title: "Gemini AI Diagnosis",
+      title: "AI Diagnosis",
       count: "100% Classified",
       subtitle: `${Object.keys(metrics.root_cause_breakdown || {}).length || 15} Root Causes Mapped`,
-      badge: "Gemini 2.5 Flash",
+      badge: "AI",
       color: "border-purple-500/40 bg-purple-950/20 text-purple-400 hover:border-purple-500/80",
       indicator: "bg-purple-400 shadow-glow-purple",
       details: {

@@ -26,7 +26,7 @@ export default function RoiCalculator() {
             </h3>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            Model revenue gains comparing Razorpay AI Autonomous Recovery against traditional blind 24h cron retries.
+            Model revenue gains comparing AI Autonomous Recovery against traditional blind 24h cron retries.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function RoiCalculator() {
         {/* Slider 3: AI Recovery Target */}
         <div className="space-y-2 bg-surface/60 p-4 rounded-xl border border-border/60">
           <div className="flex justify-between items-center text-xs">
-            <span className="text-slate-300 font-semibold">AI Target Recovery Rate (Gemini 2.5 Engine)</span>
+            <span className="text-slate-300 font-semibold">AI Target Recovery Rate</span>
             <span className="text-emerald-400 font-extrabold text-sm font-mono">{aiRecoveryRatePct}%</span>
           </div>
           <input
@@ -104,7 +104,7 @@ export default function RoiCalculator() {
             <span>📊 Methodology &amp; Benchmarking:</span>
           </span>
           <p className="text-slate-400 text-[11px]">
-            Compares standard blind 24h cron retries (industry benchmark ~15% recovery) against Razorpay AI Autonomous Recovery Engine featuring salary cycle boosts, TRAI quiet hours spacing, dynamic 1-click UPI links, and WhatsApp 2-way VIP churn retention offers.
+            Compares standard blind 24h cron retries (industry benchmark ~15% recovery) against AI Autonomous Recovery Engine featuring salary cycle boosts, TRAI quiet hours spacing, dynamic 1-click UPI links, and WhatsApp 2-way VIP churn retention offers.
           </p>
         </div>
       </div>

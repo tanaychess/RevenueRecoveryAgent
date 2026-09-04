@@ -24,10 +24,10 @@ export default function SystemTourModal({ isOpen, onClose, onRunBatch }: Props) 
             </div>
             <div>
               <h2 className="text-base font-bold text-white flex items-center gap-2">
-                Razorpay Recovery Agent 2.0 <span className="text-xs px-2 py-0.5 rounded-full bg-rzp-blue/20 text-rzp-blue font-mono font-medium">Concept & Architecture Guide</span>
+                AI Recovery Agent 2.0 <span className="text-xs px-2 py-0.5 rounded-full bg-rzp-blue/20 text-rzp-blue font-mono font-medium">Concept & Architecture Guide</span>
               </h2>
               <p className="text-xs text-slate-400">
-                Autonomous Revenue Recovery powered by Google Gemini 2.5 Flash &amp; RBI/NPCI deterministic guardrails.
+                Autonomous Revenue Recovery powered by Artificial Intelligence &amp; RBI/NPCI deterministic guardrails.
               </p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function SystemTourModal({ isOpen, onClose, onRunBatch }: Props) 
 
                 <div className="p-4 rounded-xl bg-surface border border-border">
                   <div className="text-2xl mb-1">🧠</div>
-                  <h4 className="font-bold text-white text-sm mb-1">Gemini 2.5 Flash Diagnosis</h4>
+                  <h4 className="font-bold text-white text-sm mb-1">Artificial Intelligence Diagnosis</h4>
                   <p className="text-slate-400 leading-relaxed text-[11px]">
                     Analyzes error telemetry, bank switch status, and customer tier in &lt;140ms to prescribe the exact optimal recovery channel.
                   </p>
@@ -114,7 +114,7 @@ export default function SystemTourModal({ isOpen, onClose, onRunBatch }: Props) 
                 <div className="flex items-center justify-between">
                   <h4 className="font-bold text-white text-sm flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
-                    Pillar 1: Multi-Factor AI Diagnostic Core (Gemini 2.5 Flash)
+                    Pillar 1: Multi-Factor AI Diagnostic Core
                   </h4>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">
                     &lt;140ms Inference
@@ -170,7 +170,7 @@ export default function SystemTourModal({ isOpen, onClose, onRunBatch }: Props) 
                 },
                 {
                   num: "2",
-                  title: "Gemini 2.5 Flash Diagnosis",
+                  title: "Artificial Intelligence Diagnosis",
                   badge: "Root-Cause Intelligence",
                   color: "border-purple-500/40 text-purple-400",
                   desc: "Evaluates raw error codes, issuer bank switch health, customer retry history, and generates chain-of-thought rationale.",

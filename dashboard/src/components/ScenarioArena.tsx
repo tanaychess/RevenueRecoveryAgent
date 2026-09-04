@@ -255,7 +255,7 @@ export default function ScenarioArena({ onBatchUpdated }: Props) {
               <span>🧪 Single Transaction Failure Injector</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Inject custom failed payment payloads to test Gemini 2.5 Flash diagnosis and regulatory policy enforcement.
+              Inject custom failed payment payloads to test Artificial Intelligence diagnosis and regulatory policy enforcement.
             </p>
           </div>
         </div>
@@ -373,7 +373,7 @@ export default function ScenarioArena({ onBatchUpdated }: Props) {
             disabled={loadingScenario !== null}
             className="rzp-glow-btn text-white font-bold text-xs px-6 py-2.5 rounded-xl transition disabled:opacity-50 shadow-lg"
           >
-            {loadingScenario === "custom" ? "Diagnosing with Gemini…" : "Inject Failure & Execute AI Recovery ➔"}
+            {loadingScenario === "custom" ? "Diagnosing with AI…" : "Inject Failure & Execute AI Recovery ➔"}
           </button>
         </div>
 
