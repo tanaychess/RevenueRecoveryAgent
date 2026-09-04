@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=sqlite:////app/data_store/recovery.db
+    volumes:
+      # Mount host source code into container for instant hot-reloading (no rebuild needed on code edits!)
+      - .:/app
+      - backend_data:/app/data_store
+    command: ["uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
+      - NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+    volumes:
+      # Mount dashboard source code for Next.js Fast Refresh
+      - ./dashboard:/app
+      # Preserve container node_modules & build cache
+      - /app/node_modules
+      - /app/.next
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - backend
+
+volumes:
+  backend_data:

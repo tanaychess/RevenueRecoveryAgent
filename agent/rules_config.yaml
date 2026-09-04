@@ -1,0 +1,257 @@
+# =============================================================================
+# Razorpay AI Revenue Recovery Agent - Multi-Channel Decision Engine Config
+#
+# This file is the single source of truth for WHAT the agent executes once a
+# root cause has been diagnosed. It is deterministic, auditable, and strictly
+# enforces RBI, NPCI, TRAI, and DPDP Indian regulatory frameworks.
+# =============================================================================
+
+version: 2
+
+# Global safety ceilings
+global_max_attempts: 4
+global_cooldown_hours_min: 1
+
+# Indian Regulatory & Compliance Constraints
+compliance_guardrails:
+  npci_emandate_min_spacing_hours: 24
+  trai_quiet_hours_start_ist: 21  # 9:00 PM IST
+  trai_quiet_hours_end_ist: 8     # 8:00 AM IST
+  rbi_pre_debit_notification_hours: 24
+  rbi_pre_debit_threshold_inr: 5000.0
+  dpdp_pii_masking_enabled: true
+  fraud_zero_customer_contact: true
+
+# Peak Bank Clearing Windows (IST) for Smart Scheduling
+smart_scheduling:
+  salary_cycle_days: [1, 2, 3, 4, 5, 28, 29, 30, 31]
+  peak_clearing_morning_start_ist: 6
+  peak_clearing_morning_end_ist: 9
+  peak_clearing_evening_start_ist: 19
+  peak_clearing_evening_end_ist: 22
+
+# Per-root-cause playbooks
+root_causes:
+
+  insufficient_funds:
+    description: "Customer's account or card balance was insufficient at charge time."
+    action_sequence:
+      - action: retry_charge
+        delay_hours: 24
+      - action: send_nudge
+        delay_hours: 24
+      - action: send_payment_link
+        delay_hours: 48
+      - action: escalate_human
+        delay_hours: 24
+    max_attempts: 3
+    cooldown_hours: 24
+    allow_customer_contact: true
+    smart_salary_boost: true
+    stop_conditions:
+      - "attempts >= max_attempts"
+      - "payment_succeeded == true"
+      - "customer_opted_out == true"
+    compliance_note: "NPCI e-mandate compliant retry spacing (min 24h). Smart scheduled to match customer salary/clearing cycles."
+
+  card_expired:
+    description: "Card on file has passed expiration date or was replaced."
+    action_sequence:
+      - action: send_payment_link
+        delay_hours: 0
+      - action: send_nudge
+        delay_hours: 24
+      - action: escalate_human
+        delay_hours: 48
+    max_attempts: 1
+    cooldown_hours: 0
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+      - "nudges_sent >= 2"
+      - "customer_opted_out == true"
+    compliance_note: "Zero debit retries. Retrying known expired cards degrades merchant issuer reputation."
+
+  coft_token_expired:
+    description: "Card-on-File Tokenization (COFT) cryptogram expired or unmapped."
+    action_sequence:
+      - action: send_payment_link
+        delay_hours: 0
+      - action: send_nudge
+        delay_hours: 24
+    max_attempts: 1
+    cooldown_hours: 0
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+    compliance_note: "RBI COFT Token Mandate compliant: Prompts customer for fresh 1-click tokenization consent."
+
+  bank_decline_soft:
+    description: "Temporary decline from issuing bank (do_not_honor with retry-safe flag, core banking busy)."
+    action_sequence:
+      - action: retry_charge
+        delay_hours: 4
+      - action: retry_charge
+        delay_hours: 24
+      - action: send_payment_link
+        delay_hours: 24
+    max_attempts: 3
+    cooldown_hours: 4
+    allow_customer_contact: true
+    stop_conditions:
+      - "attempts >= max_attempts"
+      - "payment_succeeded == true"
+    compliance_note: "Soft bank decline auto-recovery. Spaced outside bank batch processing downtime."
+
+  mandate_revoked:
+    description: "UPI AutoPay or e-NACH mandate explicitly revoked/cancelled by user or bank."
+    action_sequence:
+      - action: send_payment_link
+        delay_hours: 0
+      - action: escalate_human
+        delay_hours: 48
+    max_attempts: 0
+    cooldown_hours: 0
+    allow_customer_contact: true
+    stop_conditions:
+      - "always_stop_after_first_action == true"
+    compliance_note: "HARD STOP. Retrying a debit on a revoked mandate violates RBI/NPCI guidelines. Re-authorization link only."
+
+  mandate_paused:
+    description: "Customer temporarily paused recurring UPI AutoPay mandate."
+    action_sequence:
+      - action: send_nudge
+        delay_hours: 0
+      - action: send_payment_link
+        delay_hours: 48
+    max_attempts: 0
+    cooldown_hours: 0
+    allow_customer_contact: true
+    stop_conditions:
+      - "always_stop_after_first_action == true"
+    compliance_note: "NPCI Pause Mandate workflow: Informs customer about resume date and provides optional one-time link."
+
+  upi_pin_limit:
+    description: "Customer reached daily bank UPI transaction/debit limit."
+    action_sequence:
+      - action: send_nudge
+        delay_hours: 0
+      - action: retry_charge
+        delay_hours: 24
+      - action: send_payment_link
+        delay_hours: 12
+    max_attempts: 2
+    cooldown_hours: 24
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+    compliance_note: "Snoozes retry to next calendar day (00:01 AM reset) when daily bank limit refreshes."
+
+  upi_app_unavailable:
+    description: "UPI PSP App (GPay/PhonePe/Paytm) or NPCI UPI switch temporarily degraded."
+    action_sequence:
+      - action: retry_charge
+        delay_hours: 2
+      - action: send_payment_link
+        delay_hours: 6
+    max_attempts: 2
+    cooldown_hours: 2
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+
+  netbanking_down:
+    description: "Issuing Bank NetBanking server maintenance / scheduled downtime."
+    action_sequence:
+      - action: smart_routing_fallback
+        delay_hours: 0
+      - action: send_payment_link
+        delay_hours: 2
+    max_attempts: 1
+    cooldown_hours: 2
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+    compliance_note: "Recommends instant switch to UPI / Card alternative routing to preserve session."
+
+  authentication_failed_3ds:
+    description: "Customer failed or abandoned 3D-Secure OTP challenge."
+    action_sequence:
+      - action: send_nudge
+        delay_hours: 0.1
+      - action: send_payment_link
+        delay_hours: 2
+    max_attempts: 1
+    cooldown_hours: 0.1
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+
+  bnpl_limit_exceeded:
+    description: "BNPL / Postpaid credit line limit exceeded or credit partner service degradation."
+    action_sequence:
+      - action: send_payment_link
+        delay_hours: 0
+      - action: send_nudge
+        delay_hours: 12
+      - action: escalate_human
+        delay_hours: 24
+    max_attempts: 1
+    cooldown_hours: 0
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+    compliance_note: "Dispatches multi-rail alternative payment link (UPI/Cards) to bypass exhausted BNPL credit limit."
+
+  wallet_kyc_pending:
+    description: "Prepaid Wallet transaction declined due to pending minimum/full KYC requirements."
+    action_sequence:
+      - action: send_payment_link
+        delay_hours: 0
+      - action: send_nudge
+        delay_hours: 24
+    max_attempts: 1
+    cooldown_hours: 0
+    allow_customer_contact: true
+    stop_conditions:
+      - "payment_succeeded == true"
+    compliance_note: "RBI Prepaid Payment Instrument (PPI) Master Directions compliant: Routes customer to UPI/Cards."
+
+  fraud_hold:
+    description: "Transaction flagged by risk/AML engine for suspected fraud or velocity anomaly."
+    action_sequence:
+      - action: escalate_human
+        delay_hours: 0
+    max_attempts: 0
+    cooldown_hours: 0
+    allow_customer_contact: false
+    stop_conditions:
+      - "always_stop_after_first_action == true"
+    compliance_note: "HARD STOP. Zero automated debit, zero customer communication. Quarantined for human risk ops."
+
+  technical_timeout:
+    description: "Network or gateway timeout during transit; state unconfirmed."
+    action_sequence:
+      - action: retry_charge
+        delay_hours: 0.5
+      - action: retry_charge
+        delay_hours: 6
+    max_attempts: 2
+    cooldown_hours: 0.5
+    allow_customer_contact: false
+    stop_conditions:
+      - "attempts >= max_attempts"
+      - "payment_succeeded == true"
+
+  unknown:
+    description: "Unclassified failure code or ambiguous gateway response."
+    action_sequence:
+      - action: escalate_human
+        delay_hours: 0
+    max_attempts: 0
+    cooldown_hours: 0
+    allow_customer_contact: false
+    stop_conditions:
+      - "always_stop_after_first_action == true"
+
+classification_confidence_threshold: 0.55

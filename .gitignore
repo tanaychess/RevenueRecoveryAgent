@@ -1,0 +1,57 @@
+# ── Python ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# ── Environment / secrets ──────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Database ────────────────────────────────────────────
+*.db
+*.sqlite3
+*.db-journal
+
+# ── Backups / scratch files ─────────────────────────────
+*.bak
+*.tmp
+*.orig
+
+# ── Node / Next.js (dashboard) ─────────────────────────
+dashboard/node_modules/
+dashboard/.next/
+dashboard/out/
+dashboard/dist/
+dashboard/build/
+dashboard/.env.local
+dashboard/.env.*.local
+dashboard/*.tsbuildinfo
+dashboard/npm-debug.log*
+dashboard/yarn-debug.log*
+dashboard/yarn-error.log*
+dashboard/.vercel
+
+# ── OS ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+logs/
